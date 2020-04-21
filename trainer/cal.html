@@ -1,0 +1,161 @@
+<html>
+<body>
+<disv class="p7ehc-a grid_7 page-sidebar post-1023 page type-page status-publish hentry" id="post-1023">
+<h3 class="page-title">Online Free BMR Daily Calorie Requirement Calculator</h3>
+<p>Please see the BMR Calculator below</p>
+<h1>BMR Calculator</h1>
+<script language="javascript"> 
+function IsNumber(fldId)
+{
+var fld=document.getElementById(fldId).value;
+if(isNaN(fld))
+{		
+document.getElementById(fldId).value=fld.substring(0, fld.length-1);
+var newvalue=document.getElementById(fldId).value;
+IsNumber(fldId);
+}
+return;	
+}
+function FtToCm(ftfld,infld,savefld)
+{
+var ft=document.getElementById(ftfld).value;
+var inch=document.getElementById(infld).value;
+if(!isNaN(ft) && !isNaN(inch))
+{
+var allinch= ft * 12;
+allinch= parseInt(allinch) + parseInt(inch);
+var cm =allinch * 2.54;
+document.getElementById(savefld).value=Math.round(cm);
+}
+else
+{
+document.getElementById("feet").value=ft.substring(0, ft.length-1);
+document.getElementById("inch").value=inch.substring(0, inch.length-1);
+}
+//form2.field.value =lbs;
+//alert(field);
+return;
+}
+function CmToFt(cm,ftfld,infld)
+{
+if(!isNaN(cm))
+{
+var newcm=cm * 0.3937;
+var ft = newcm / 12;
+var remain= newcm % 12;
+var inchs= remain;
+document.getElementById(ftfld).value=Math.round(ft);
+document.getElementById(infld).value=Math.round(inchs);
+}
+else
+{    
+document.getElementById("cm").value=cm.substring(0, cm.length-1);
+}
+//form2.field.value =lbs;
+//alert(field);
+return;
+}
+function KgToLbs(kg,field)
+{
+if(!isNaN(kg))
+{
+var lbs= kg * 2.2;    
+document.getElementById(field).value=Math.round(lbs);
+}
+else
+{
+document.getElementById("kg").value=kg.substring(0, kg.length-1);
+}
+//form2.field.value =lbs;
+//alert(field);
+return;
+}
+function LbsToKg(lbs,field)
+{
+if(!isNaN(lbs))
+{
+var kg= lbs / 2.2;
+document.getElementById(field).value=Math.round(kg);
+}
+else
+{
+document.getElementById("lbs").value=lbs.substring(0, lbs.length-1);
+}
+return;
+}
+function validateForm(frm)
+{
+age=frm.age.value;
+kg=frm.kg.value;
+cm=frm.cm.value;
+if(age=="" || kg=="" || cm=="" )
+{
+alert('Error: all fields are required!');
+return false;
+}
+return;
+}
+function showHide(fldshow,fldhide,label,labelfld) 
+{
+var myTextelemShow = document.getElementById(fldshow);
+var myTextelemLabel = document.getElementById(labelfld);
+var myTextelemHide = document.getElementById(fldhide);
+if(myTextelemShow.style.display == 'none')
+{
+myTextelemShow.style.display = 'inline' ;
+myTextelemLabel.innerHTML = label;
+}
+if(myTextelemHide.style.display != 'none')
+{
+myTextelemHide.style.display = 'none';
+}
+}
+</script>
+<div class="the_calc_div">
+<form method="post" name="form1" onsubmit="return validateForm(this);">
+<p><label>Your age:</label>
+<input type="text" size="7"  name="age" id="age" onkeyup="IsNumber(this.id)" value="" > 
+</p>
+<p><label>Gender:</label>
+<input id="gender"  name="gender" type="radio" value="male" checked /> <label style="width:75px;display:inline;float:none;">Male</label>
+<input id="gender"  name="gender" type="radio" value="female" /> <label style="width:75px;display:inline;float:none;">Female</label>
+</p>
+<p><label>Your weight:</label>
+<input id="weight" name="weight" type="radio" value="lbs" onclick="showHide('lbs','kg','lbs','labelw');" checked />
+<label style="width:75px;display:inline;float:none;">lbs</label>
+<input id="weight"  name="weight" type="radio" value="kg" onclick="showHide('kg','lbs','kg','labelw');"  />
+<label style="width:75px;display:inline;float:none;">kg</label>
+</p>
+<p><label >&nbsp;</label>
+<input type="text" name="lbs" id="lbs" size="4" onkeyup="LbsToKg(this.value,'kg');" style='display:inline; ' value="">  
+<input type="text" name="kg" id="kg" size="4" onkeyup="KgToLbs(this.value,'lbs');" style="display:none;" value=""> 
+<span id="labelw">
+lbs					</span>
+</p>
+<p><label>Your height:</label>
+<input id="height"  name="height" type="radio" value="cm" onclick="showHide('cm','feet','cm','labelh');showHide('cm','inch','cm','labelh');" checked />
+<label style="width:75px;display:inline;float:none;">cm</label>
+<input id="height" name="height" type="radio" value="feet" onclick="showHide('feet','cm','feet/inch','labelh');showHide('inch','cm','feet/inch','labelh');"  />
+<label style="width:75px;display:inline;float:none;">feet/inch</label>
+</p>
+<p><label >&nbsp;</label>
+<input type="text" name="cm" id="cm" size="4" onkeyup="IsNumber(this.id);CmToFt(this.value,'feet','inch');" value="" style='display:inline; '/>  
+<input type="text" name="feet" id="feet" size="4" onkeyup="IsNumber(this.id);FtToCm('feet','inch','cm');" style="display:none; " value="" /> 
+<input type="text" name="inch" id="inch" size="4" onkeyup="IsNumber(this.id);FtToCm('feet','inch','cm');" style="display:none;" value="" /> 
+<span id="labelh" style='display:inline;' > 
+cm                   </span>
+</p>
+<p><label>Daily Activity:</label> <select name="activity">    
+<option value="0.2" >No sport/exercise</option>
+<option value="0.375" >Light activity (sport 1-3 times per week)</option>
+<option value="0.55" >Moderate activity (sport 3-5 times per week)</option>
+<option value="0.725" >High activity (everyday exercise)</option>
+<option value="0.9" >Extreme activity (professional athlete)</option>	
+</select></p>
+<div style="text-align:center;clear:both;"><input type="submit" value="Calculate!"></div>
+<input type="hidden" name="calculator_ok" value="1">
+</form>	
+<br /><br /><small>* this is your total calorie needs per day.
+</div>
+</body>
+</html>
